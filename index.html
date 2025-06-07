@@ -304,15 +304,19 @@
 
         /* Modal */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
+        display: none; /* Inicia oculto */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+        justify-content: center; /* Centraliza o modal-content */
+        align-items: center; /* Centraliza o modal-content */
+        padding: 20px;
+        box-sizing: border-box;
+    }
 
         .modal.active {
             display: flex;
@@ -321,41 +325,50 @@
         }
 
         .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
+        background-color: #fefefe;
+        margin: auto; /* Para centralizar */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px; /* Sua max-width original */
+        border-radius: 10px;
+        position: relative; /* Para o botão de fechar */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+        max-height: 90vh; /* Limita a altura do modal na tela */
+    }
 
         .modal-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .modal-header h2 {
-            color: #333;
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .modal-header h2 {
+        color: #333;
+        margin-bottom: 5px;
+    }
+    .modal-header p {
+        color: #666;
+        font-size: 0.9em;
+    }
 
         .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            background: none;
-            border: none;
-            font-size: 2em;
-            cursor: pointer;
-            color: #999;
-        }
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
 
-        .close-btn:hover {
-            color: #333;
-        }
+    .close-btn:hover,
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
         .form-group {
             margin-bottom: 25px;
@@ -570,17 +583,44 @@
 
         /* Cupom Não Fiscal - Estilo Tradicional */
         .receipt-content {
-            font-family: 'Courier New', monospace;
-            background: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 20px auto;
-            white-space: pre-line;
-            font-size: 11px;
-            line-height: 1.2;
-            max-width: 280px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+        font-family: monospace; /* Fonte monoespaçada é comum em cupons */
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #333;
+    }
+
+         .receipt-content h2, .receipt-content h3 {
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 1.1em;
+    }
+
+    .receipt-content p {
+        margin-bottom: 2px;
+    }
+
+    .receipt-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .receipt-content th, .receipt-content td {
+        border-bottom: 1px dashed #ccc; /* Linhas pontilhadas para estilo de cupom */
+        padding: 4px 0;
+        text-align: left;
+        font-size: inherit; /* Herda o tamanho da fonte do .receipt-content */
+    }
+
+    .receipt-content th:nth-child(2),
+    .receipt-content td:nth-child(2) {
+        text-align: center; /* Quantidade centralizada */
+    }
+
+    .receipt-content th:last-child,
+    .receipt-content td:last-child {
+        text-align: right; /* Preço total à direita */
+    }
 
         .receipt-line {
             text-align: center;
@@ -910,54 +950,184 @@
         }
 
         /* Responsivo */
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-item {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .search-filter {
-                flex-direction: column;
-            }
-            
-            .clients-grid {
-                grid-template-columns: 1fr;
-            }
+        .receipt-content {
+        font-family: 'monospace'; /* Típico para cupons fiscais/não fiscais */
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #333;
+        max-width: 80mm; /* Típico de largura de impressora de cupom */
+        margin: 0 auto;
+        padding: 5px; /* Um pequeno padding para o conteúdo */
+    }
 
-            .modern-modal-content {
-                padding: 30px 20px;
-                margin: 20px;
-            }
+    .receipt-center {
+        text-align: center;
+    }
 
-            .modal-buttons {
-                flex-direction: column;
-            }
+    .receipt-left {
+        text-align: left;
+    }
 
-            .modern-btn {
-                margin: 5px 0;
-                width: 100%;
-            }
+    .receipt-bold {
+        font-weight: bold;
+    }
 
-            .toast-container {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                max-width: none;
-            }
+    .receipt-small {
+        font-size: 0.8em;
+    }
 
-            .toast {
-                transform: translateY(-100px);
-                animation: toastSlideInMobile 0.3s ease forwards;
-            }
+    .receipt-medium {
+        font-size: 1em; /* Ajuste conforme necessário */
+    }
 
-            @keyframes toastSlideInMobile {
-                to { transform: translateY(0); }
-            }
+    .receipt-separator {
+        white-space: pre-wrap; /* Preserva espaços em branco e quebras de linha */
+        margin: 5px 0;
+        font-size: 0.8em; /* Ajuste para o separador */
+    }
+
+    .receipt-item-line {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 10px; /* Recuo para os itens */
+        font-size: 0.9em;
+    }
+
+    .receipt-total-line {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 1.2em;
+    }
+
+    .receipt-large {
+        font-size: 1.2em; /* Para o TOTAL */
+        font-weight: bold;
+    }
+
+
+    /* ========================================= */
+    /* NOVO/AJUSTADO: Estilos para Impressão (@media print) */
+    /* ========================================= */
+    @media print {
+        /* 1. Ocultar TUDO que não é o modal do cupom */
+        /* Isso garante que o formulário principal e outros elementos NÃO apareçam */
+        body > *:not(#receiptModal) {
+            display: none !important;
         }
+
+        /* 2. Resetar estilos do body para impressão */
+        body {
+            background: none !important;
+            color: #000 !important;
+            font-size: 10pt !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-height: auto !important;
+            /* Se a impressora for térmica e você quiser uma largura exata */
+            /* width: 80mm; */
+            /* Isso pode centralizar o conteúdo impresso na página */
+            /* display: flex; */
+            /* justify-content: center; */
+            /* align-items: flex-start; */
+        }
+
+        /* 3. Tornar o modal visível e adaptá-lo à impressão */
+        #receiptModal {
+            display: block !important; /* Torna o modal visível */
+            position: absolute !important; /* Remove posicionamento fixo para impressão */
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important; /* Ocupa a largura total da página */
+            height: auto !important; /* Altura automática */
+            background-color: transparent !important; /* Remove o fundo semi-transparente */
+            padding: 0 !important; /* Remove padding extra do modal */
+            /* Se estiver usando flexbox para centralizar na tela, remova-os aqui */
+            justify-content: flex-start !important;
+            align-items: flex-start !important;
+        }
+
+        /* 4. Ajustar o conteúdo do modal para impressão */
+        .modal-content {
+            background-color: white !important; /* Garante fundo branco para o cupom */
+            margin: 0 !important; /* Remove margens */
+            padding: 10mm !important; /* Adiciona padding para margem na página impressa */
+            border: none !important; /* Remove bordas */
+            width: 100% !important; /* Ocupa largura total disponível */
+            max-width: none !important; /* Remove limite de largura */
+            box-shadow: none !important; /* Remove sombras */
+            border-radius: 0 !important; /* Remove bordas arredondadas */
+            overflow: visible !important; /* Garante que nada seja cortado */
+            max-height: none !important; /* Permite altura total do conteúdo */
+        }
+
+        /* 5. Ocultar elementos dentro do modal que NÃO são parte do cupom */
+        .close-btn, /* Oculta o botão de fechar do modal */
+        .modal-header p, /* Oculta a linha "Visualize e imprima a nota" */
+        /* Oculta os botões "Imprimir" e "Finalizar Pedido" que estão dentro do modal */
+        #receiptModal .btn-success,
+        #receiptModal .btn-primary,
+        #receiptModal div[style*="text-align: center; margin-top: 30px;"] { /* Oculta a div que contém os botões */
+            display: none !important;
+        }
+
+
+        /* 6. Ajustes finos para o conteúdo do cupom na impressão (suas classes específicas) */
+        .receipt-content {
+            font-family: monospace !important; /* Garante fonte monoespaçada */
+            font-size: 9pt !important; /* Tamanho de fonte ideal para impressão de cupom */
+            color: #000 !important; /* Garante texto preto */
+            line-height: 1.2 !important; /* Ajusta espaçamento entre linhas */
+            width: 100% !important;
+            max-width: none !important; /* Remove a largura máxima para se adaptar à página */
+            padding: 0 !important; /* Remove padding extra para ocupar mais espaço */
+            margin: 0 auto !important; /* Centraliza o conteúdo se o body tiver largura definida */
+            page-break-after: avoid; /* Evita quebra de página logo após o conteúdo do cupom */
+        }
+
+        .receipt-center, .receipt-left {
+            /* Sem alterações significativas, eles funcionam bem */
+        }
+
+        .receipt-bold {
+            font-weight: bold !important;
+        }
+
+        .receipt-small {
+            font-size: 0.7em !important; /* Reduz um pouco mais para impressão */
+        }
+
+        .receipt-medium {
+            font-size: 0.9em !important; /* Ajuste para impressão */
+        }
+
+        .receipt-separator {
+            margin: 3px 0 !important; /* Espaçamento menor para separadores */
+            font-size: 0.7em !important;
+        }
+
+        .receipt-item-line {
+            margin-left: 0 !important; /* Remove recuo na impressão para usar toda largura */
+            font-size: 0.8em !important; /* Ajuste para os itens */
+        }
+
+        .receipt-total-line {
+            margin-top: 5px !important;
+            font-size: 1.1em !important; /* Ajuste para o total */
+        }
+
+        .receipt-large {
+            font-size: 1.1em !important;
+        }
+
+        /* Evitar quebras de página em elementos específicos do cupom */
+        .receipt-content table {
+            page-break-inside: avoid !important;
+        }
+        .receipt-item-line, .receipt-total-line {
+            page-break-inside: avoid !important;
+        }
+    }
     </style>
 </head>
 <body>
@@ -2016,11 +2186,11 @@ Deseja continuar?`;
 
         // Sistema de Cupom Não Fiscal - Estilo Tradicional
         function showReceipt(order) {
-            const receiptContent = document.getElementById('receiptContent');
-            const now = new Date(order.date);
-            const orderNumber = order.id.slice(-6);
-            
-            let receiptHTML = `
+    const receiptContent = document.getElementById('receiptContent');
+    const now = new Date(order.date);
+    const orderNumber = order.id.slice(-6);
+
+    let receiptHTML = `
 <div class="receipt-center receipt-bold receipt-medium">${settings.companyName.toUpperCase()}</div>
 ${settings.companyCNPJ ? `<div class="receipt-center receipt-small">CNPJ: ${cnpjMask(settings.companyCNPJ)}</div>` : ''}
 ${settings.companyAddress ? `<div class="receipt-center receipt-small">${settings.companyAddress}</div>` : ''}
@@ -2034,7 +2204,7 @@ ${settings.companyPhone ? `<div class="receipt-center receipt-small">Tel: ${phon
 <div class="receipt-separator">----------------------------------------</div>
 
 <div class="receipt-left receipt-small">
-Data: ${now.toLocaleDateString('pt-BR')}    Hora: ${now.toLocaleTimeString('pt-BR')}
+Data: ${now.toLocaleDateString('pt-BR')}     Hora: ${now.toLocaleTimeString('pt-BR')}
 </div>
 
 <div class="receipt-separator">........................................</div>
@@ -2050,18 +2220,18 @@ ${order.clientNeighborhood ? `<div class="receipt-left receipt-small">${order.cl
 <div class="receipt-left receipt-bold">PRODUTOS:</div>
 `;
 
-            order.items.forEach((item, index) => {
-                const itemTotal = item.quantity * item.unitPrice;
-                receiptHTML += `
+    order.items.forEach((item, index) => {
+        const itemTotal = item.quantity * item.unitPrice;
+        receiptHTML += `
 <div class="receipt-left">${item.productName}</div>
 <div class="receipt-item-line">
     <span>${item.quantity} x R$ ${item.unitPrice.toFixed(2)}</span>
     <span>R$ ${itemTotal.toFixed(2)}</span>
 </div>
 `;
-            });
+    });
 
-            receiptHTML += `
+    receiptHTML += `
 <div class="receipt-separator">----------------------------------------</div>
 
 <div class="receipt-total-line">
@@ -2072,16 +2242,16 @@ ${order.clientNeighborhood ? `<div class="receipt-left receipt-small">${order.cl
 <div class="receipt-separator">----------------------------------------</div>
 `;
 
-            if (order.notes) {
-                receiptHTML += `
+    if (order.notes) {
+        receiptHTML += `
 <div class="receipt-left receipt-bold receipt-small">OBS:</div>
 <div class="receipt-left receipt-small">${order.notes}</div>
 
 <div class="receipt-separator">........................................</div>
 `;
-            }
+    }
 
-            receiptHTML += `
+    receiptHTML += `
 <div class="receipt-center receipt-small">${settings.footerMessage}</div>
 
 <div class="receipt-separator">........................................</div>
@@ -2093,28 +2263,11 @@ ${now.toLocaleDateString('pt-BR')} - ${now.toLocaleTimeString('pt-BR')}
 <div class="receipt-center receipt-small">
 * OBRIGADO E VOLTE SEMPRE *
 </div>`;
-            
-            receiptContent.innerHTML = receiptHTML;
-            document.getElementById('receiptModal').classList.add('active');
-        }
 
-        function printReceipt() {
-            window.print();
-        }
-
-        async function finishOrder() {
-            if (currentOrder) {
-                orders.push(currentOrder);
-                await saveData();
-                
-                closeReceiptModal();
-                closeOrderModal();
-                loadClients();
-                
-                showToast('Pedido finalizado com sucesso!', 'success', 'Pedido Confirmado');
-                currentOrder = null;
-            }
-        }
+    receiptContent.innerHTML = receiptHTML;
+    // ALTERAÇÃO AQUI:
+    document.getElementById('receiptModal').style.display = 'flex'; // Garante que o modal apareça como flexbox
+}
 
         function closeReceiptModal() {
             document.getElementById('receiptModal').classList.remove('active');
