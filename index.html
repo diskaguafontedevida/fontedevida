@@ -975,35 +975,39 @@
             🖥️ Chrome OS Detectado! Veja as instruções abaixo para instalar ⬇️
         </div>
         
-        <div class="install-instructions" id="installInstructions" style="display: none;">
-            <h3>🚀 Como Instalar no Chrome OS Flex:</h3>
-            
-            <h4>📱 MÉTODO 1 - Servidor Local (RECOMENDADO):</h4>
-            <code>
-            1. Aperte <strong>Ctrl + Alt + T</strong> (Terminal)<br>
-            2. Digite: <strong>python3 -m http.server 8000</strong><br>
-            3. Abra nova aba: <strong>localhost:8000</strong><br>
-            4. Clique no arquivo HTML<br>
-            5. ✅ Agora o "Criar atalho" funciona!
-            </code>
-            
-            <h4>🔧 MÉTODO 2 - Via Arquivo:</h4>
-            <code>
-            1. Chrome → <strong>Configurações</strong><br>
-            2. <strong>Aplicativos</strong> → <strong>Gerenciar seus aplicativos</strong><br>
-            3. Clique <strong>"+ Adicionar"</strong><br>
-            4. Cole: <strong>file:///home/chronos/user/Downloads/fonte-vida.html</strong><br>
-            5. Nome: <strong>Fonte de Vida</strong>
-            </code>
-            
-            <h4>⚡ MÉTODO 3 - Extensão PWA:</h4>
-            <code>
-            1. Chrome Web Store → Pesquise <strong>"PWA Builder"</strong><br>
-            2. Instale a extensão<br>
-            3. Abra o arquivo HTML<br>
-            4. Clique na extensão → <strong>"Install as PWA"</strong>
-            </code>
-        </div>
+        <div class="chrome-os-help" id="chromeOSHelp">
+    🖥️ Chrome OS Detectado! Veja as instruções abaixo para instalar ⬇️
+</div>
+
+<div class="install-instructions" id="installInstructions">
+    <h3>🚀 Como Instalar no Chrome OS Flex:</h3>
+
+    <h4>📱 MÉTODO 1 - Servidor Local (RECOMENDADO):</h4>
+    <code>
+    1. Aperte <strong>Ctrl + Alt + T</strong> (Terminal)<br>
+    2. Digite: <strong>python3 -m http.server 8000</strong><br>
+    3. Abra nova aba: <strong>localhost:8000</strong><br>
+    4. Clique no arquivo HTML<br>
+    5. ✅ Agora o "Criar atalho" funciona!
+    </code>
+
+    <h4>🔧 MÉTODO 2 - Via Arquivo:</h4>
+    <code>
+    1. Chrome → <strong>Configurações</strong><br>
+    2. <strong>Aplicativos</strong> → <strong>Gerenciar seus aplicativos</strong><br>
+    3. Clique <strong>"+ Adicionar"</strong><br>
+    4. Cole: <strong>file:///home/chronos/user/Downloads/fonte-vida.html</strong><br>
+    5. Nome: <strong>Fonte de Vida</strong>
+    </code>
+
+    <h4>⚡ MÉTODO 3 - Extensão PWA:</h4>
+    <code>
+    1. Chrome Web Store → Pesquise <strong>"PWA Builder"</strong><br>
+    2. Instale a extensão<br>
+    3. Abra o arquivo HTML<br>
+    4. Clique na extensão → <strong>"Install as PWA"</strong>
+    </code>
+</div>
         
         <div class="header">
             <div class="app-status" id="appStatus">💧 Web App</div>
@@ -2471,6 +2475,38 @@ ${now.toLocaleDateString('pt-BR')} - ${now.toLocaleTimeString('pt-BR')}
             });
         });
     }
+</script>
+    <script>
+    // Função para verificar o modo de exibição e esconder/mostrar as instruções
+    function checkPwaDisplayMode() {
+        const chromeOSHelp = document.getElementById('chromeOSHelp');
+        const installInstructions = document.getElementById('installInstructions');
+
+        if (chromeOSHelp && installInstructions) { // Garante que os elementos existem
+            // Verifica se a aplicação está rodando em modo standalone (como um PWA instalado)
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+                // Se estiver em standalone (instalado), esconda as instruções
+                chromeOSHelp.style.display = 'none';
+                installInstructions.style.display = 'none';
+                console.log('App está em modo standalone. Instruções de instalação escondidas.');
+            } else {
+                // Se não estiver em standalone (rodando no navegador), mostre as instruções
+                chromeOSHelp.style.display = 'block'; // Ou o display original que você quer
+                installInstructions.style.display = 'block'; // Ou o display original que você quer
+                console.log('App está no navegador. Instruções de instalação visíveis.');
+            }
+        }
+    }
+
+    // Chame a função quando a página carregar
+    window.addEventListener('load', checkPwaDisplayMode);
+
+    // Opcional: Se a orientação da tela mudar (para dispositivos móveis), reavalie
+    window.addEventListener('orientationchange', checkPwaDisplayMode);
+
+    // Opcional: Você pode querer chamar checkPwaDisplayMode()
+    // se houver um evento de "appinstalled" ou algo similar
+    // window.addEventListener('appinstalled', checkPwaDisplayMode); // Esta API não é amplamente suportada ainda
 </script>
 </body>
 </html>
